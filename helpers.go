@@ -44,7 +44,15 @@ func (p Pack) GetRecord(fn RecordFinder) (Record, bool) {
 func (p Pack) GetValue(fn RecordFinder) (float64, bool) {
 	r, ok := p.GetRecord(fn)
 
-	if !ok || r.Value == nil {
+	if !ok {
+		return 0.0, false
+	}
+
+	return r.GetValue()	
+}
+
+func (r Record) GetValue() (float64, bool) {
+	if r.Value == nil {
 		return 0.0, false
 	}
 
@@ -84,6 +92,10 @@ func (p Pack) GetTime(fn RecordFinder) (time.Time, bool) {
 		return time.Time{}, false
 	}
 
+	return r.GetTime()
+}
+
+func (r Record) GetTime() (time.Time, bool) {
 	return time.Unix(int64(r.Time), 0), true
 }
 
