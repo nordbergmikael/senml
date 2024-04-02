@@ -96,7 +96,7 @@ func (p Pack) GetTime(fn RecordFinder) (time.Time, bool) {
 }
 
 func (r Record) GetTime() (time.Time, bool) {
-	return time.Unix(int64(r.Time), 0), true
+	return time.Unix(int64(r.Time), 0).UTC(), true
 }
 
 func (p Pack) GetLatLon() (float64, float64, bool) {
